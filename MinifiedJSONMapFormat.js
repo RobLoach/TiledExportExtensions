@@ -5,8 +5,7 @@
 *       https://github.com/robloach/tiled-plugins
 *
 *   DESCRIPTION:
-*       This Tiled plugin will export minified JSON files to decrease the size of the
-*       output .json map files.
+*       This Tiled plugin will export minified JSON files (*.min.json) to decrease the size.
 *
 *   DEPENDENCIES:
 *       Tiled https://www.mapeditor.org/

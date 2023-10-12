@@ -5,7 +5,9 @@
 *       https://github.com/robloach/tiled-plugins
 *
 *   DESCRIPTION:
-*       This Tiled plugin will embed all images in the JSON format, base64 encoded.
+*       This Tiled plugin will embed all images in the JSON format, base64 encoded. It will
+*       replace the "image" values from their filenames to a base64 encoded data field, along
+*       add an "imagesize" property containing the byte size of the image file.
 *
 *   DEPENDENCIES:
 *       Tiled https://www.mapeditor.org/
@@ -54,11 +56,13 @@ function EmbedJSONMapFormatIterate(obj, baseDir) {
             const fullFilePath = FileInfo.joinPaths(baseDir, fileName)
             const binaryFile = new BinaryFile(fullFilePath, BinaryFile.ReadOnly)
             const arrayBuffer = binaryFile.readAll()
+            const size = binaryFile.size
             binaryFile.close()
 
             // Replace the image value with a base64 encoded.
             const extension = FileInfo.suffix(fileName)
             obj[key] = "data:image/" + extension + ";base64," + Base64.encode(arrayBuffer)
+            obj['imagesize'] = size;
         }
     }
 }
