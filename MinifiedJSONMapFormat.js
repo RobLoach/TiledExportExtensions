@@ -8,12 +8,12 @@
 *       This Tiled plugin will export minified JSON files to decrease the size of the
 *       output .json map files.
 *
-*   INSTALL:
-*       1. Add this file to your Tiled extensions directory
-*       2. When exporting, select "Minified JSON map files (*.json)" as the file type
-*
 *   DEPENDENCIES:
 *       Tiled https://www.mapeditor.org/
+*
+*   INSTALL:
+*       1. Add this file to your Tiled extensions directory
+*       2. When exporting, select "Minified JSON map files (*.min.json)" as the file type
 *
 *   Copyright 2023 Rob Loach (@RobLoach)
 *
@@ -38,22 +38,23 @@
 *     3. This notice may not be removed or altered from any source distribution.
 *
 **********************************************************************************************/
+
 var MinifiedJsonMapFormat = {
     name: "Minified JSON map files",
-    extension: "json",
+    extension: "min.json",
 
     write: function(map, fileName) {
         // Load the original JSON map format.
-        var jsFormat = tiled.mapFormat("json")
+        const jsFormat = tiled.mapFormat("json")
 
         // Write the JSON file using the original map format.
         jsFormat.write(map, fileName)
 
         // Read the output from the original JSON map format.
-        var textFile = new TextFile(fileName, TextFile.ReadOnly)
-        var txt = textFile.readAll()
+        let textFile = new TextFile(fileName, TextFile.ReadOnly)
+        const txt = textFile.readAll()
         textFile.close()
-        var jsonData = JSON.parse(txt)
+        const jsonData = JSON.parse(txt)
 
         // Write the file again, but use JSON.stringify to minify it.
         textFile = new TextFile(fileName, TextFile.WriteOnly)
@@ -63,4 +64,4 @@ var MinifiedJsonMapFormat = {
     }
 }
 
-tiled.registerMapFormat("json", MinifiedJsonMapFormat)
+tiled.registerMapFormat("min.json", MinifiedJsonMapFormat)
