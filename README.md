@@ -1,6 +1,6 @@
-# Tiled Extensions
+# TiledExportExtensions
 
-A collection of [Tiled](https://www.mapeditor.org/) extensions.
+A collection of [Tiled](https://www.mapeditor.org/) extensions to assist with exporting Tiled map data.
 
 ## Extensions
 
