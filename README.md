@@ -5,8 +5,8 @@ A collection of [Tiled](https://www.mapeditor.org/) extensions.
 ## Extensions
 
 | Name | Description |
-| ---- | ----------- |
-| [MinifiedJSONMapFormat](MinifiedJSONMapFormat.js) | Export minified JSON `*.min.json` of your maps to decrease their file size. |
+|:---- |:----------- |
+| [Minified JSON Map Format](MinifiedJSONMapFormat.js) | Export minified JSON `*.min.json` of your maps to decrease their file size. |
 
 ## License
 
