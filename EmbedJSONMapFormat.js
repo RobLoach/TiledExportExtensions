@@ -1,19 +1,18 @@
 /**********************************************************************************************
 *
-*   Tiled Plugin: Minified JSON Map Format
+*   Tiled Plugin: Embed JSON Map Format
 *
 *       https://github.com/robloach/tiled-plugins
 *
 *   DESCRIPTION:
-*       This Tiled plugin will export minified JSON files to decrease the size of the
-*       output .json map files.
+*       This Tiled plugin will embed all images in the JSON format, base64 encoded.
 *
 *   DEPENDENCIES:
 *       Tiled https://www.mapeditor.org/
 *
 *   INSTALL:
 *       1. Add this file to your Tiled extensions directory
-*       2. When exporting, select "Minified JSON map files (*.min.json)" as the file type
+*       2. When exporting, select "Embed JSON map files (*.embed.json)" as the file type
 *
 *   Copyright 2023 Rob Loach (@RobLoach)
 *
@@ -39,9 +38,34 @@
 *
 **********************************************************************************************/
 
-var MinifiedJsonMapFormat = {
-    name: "Minified JSON map files",
-    extension: "min.json",
+function EmbedJSONMapFormatIterate(obj, baseDir) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'object') {
+            if (Array.isArray(obj[key])) {
+                for (let i = 0; i < obj[key].length; i++) {
+                    EmbedJSONMapFormatIterate(obj[key][i], baseDir);
+                }
+            } else {
+                EmbedJSONMapFormatIterate(obj[key], baseDir);
+            }
+        } else if (key === 'image') {
+            // Load the image data.
+            const fileName = obj[key];
+            const fullFilePath = FileInfo.joinPaths(baseDir, fileName)
+            const binaryFile = new BinaryFile(fullFilePath, BinaryFile.ReadOnly)
+            const arrayBuffer = binaryFile.readAll()
+            binaryFile.close()
+
+            // Replace the image value with a base64 encoded.
+            const extension = FileInfo.suffix(fileName)
+            obj[key] = "data:image/" + extension + ";base64," + Base64.encode(arrayBuffer)
+        }
+    }
+}
+
+var EmbedJSONMapFormat = {
+    name: "Embed JSON map files",
+    extension: "embed.json",
 
     write: function(map, fileName) {
         // Whitespace
@@ -59,6 +83,10 @@ var MinifiedJsonMapFormat = {
         textFile.close()
         const jsonData = JSON.parse(txt)
 
+        // Make sure to pass in the relative path to the export.
+        const dir = FileInfo.path(fileName)
+        EmbedJSONMapFormatIterate(jsonData, dir)
+
         // Write the file again, but use JSON.stringify to minify it.
         textFile = new TextFile(fileName, TextFile.WriteOnly)
         textFile.truncate()
@@ -67,4 +95,4 @@ var MinifiedJsonMapFormat = {
     }
 }
 
-tiled.registerMapFormat("min.json", MinifiedJsonMapFormat)
+tiled.registerMapFormat("embed.json", EmbedJSONMapFormat)
