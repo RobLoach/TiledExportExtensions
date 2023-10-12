@@ -29,7 +29,7 @@ The [Minified JSON Map Format](MinifiedJSONMapFormat.js) Tiled plugin will expor
 
 ### Embed JSON Map Format
 
-The [Embed JSON Map Format](EmbedJSONMapFormat.js) Tiled plugin will embed all images directly in the JSON format, base64 encoded, as `*.embed.json` files. It will replace the `image` values from their filenames to a base64 encoded data field, along add an `imagesize` property containing the byte size of the image file.
+The [Embed JSON Map Format](EmbedJSONMapFormat.js) Tiled plugin will embed all images directly in the JSON format, [Base64](https://en.wikipedia.org/wiki/Base64) encoded, as `*.embed.json` files. It will replace the `image` values from their filenames to a base64 encoded data field, along add an `imagesize` property containing the byte size of the image file.
 
 #### Before
 
