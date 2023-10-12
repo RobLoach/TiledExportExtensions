@@ -4,7 +4,10 @@ A collection of [Tiled](https://www.mapeditor.org/) extensions to assist with ex
 
 ## Extensions
 
-The following is a list of the extensions included in this pack.
+The following is a list of the extensions included in this pack:
+
+1. [Minified JSON Map Format](#minified-json-map-format)
+1. [Embed JSON Map Format](#embed-json-map-format)
 
 ### Minified JSON Map Format
 
