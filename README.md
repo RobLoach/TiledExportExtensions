@@ -6,29 +6,8 @@ A collection of [Tiled](https://www.mapeditor.org/) extensions to assist with ex
 
 The following is a list of the extensions included in this pack:
 
-1. [Minified JSON Map Format](#minified-json-map-format)
 1. [Embed JSON Map Format](#embed-json-map-format)
-
-### Minified JSON Map Format
-
-The [Minified JSON Map Format](MinifiedJSONMapFormat.js) Tiled plugin will export minified JSON files `*.min.json`, to decrease the output file size by removing the whitespace.
-
-#### Before
-
-``` json
-{ "compressionlevel":-1,
- "height":40,
- "infinite":false,
- "layers":[
-        {
-         "data":[...
-```
-
-#### After
-
-``` json
-{"compressionlevel":-1,"height":40,"infinite":false,"layers":[{"data":[...
-```
+1. [Minified JSON Map Format](#minified-json-map-format)
 
 ### Embed JSON Map Format
 
@@ -50,6 +29,27 @@ The [Embed JSON Map Format](EmbedJSONMapFormat.js) Tiled plugin will embed all i
     "imagedata": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...",
     "imagesize": 37830
 }
+```
+
+### Minified JSON Map Format
+
+The [Minified JSON Map Format](MinifiedJSONMapFormat.js) Tiled plugin will export minified JSON files `*.min.json`, to decrease the output file size by removing the whitespace. This can already be accomplished by using Tiled's "Minimize output", but having the explicit file format allows you force minification if desired, despite Tiled's settings.
+
+#### Before
+
+``` json
+{ "compressionlevel":-1,
+ "height":40,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[...
+```
+
+#### After
+
+``` json
+{"compressionlevel":-1,"height":40,"infinite":false,"layers":[{"data":[...
 ```
 
 ## Installation
