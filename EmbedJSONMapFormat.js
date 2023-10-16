@@ -61,7 +61,7 @@ function EmbedJSONMapFormatIterate(obj, baseDir) {
 
             // Replace the image value with a base64 encoded.
             const extension = FileInfo.suffix(fileName)
-            obj[key] = "data:image/" + extension + ";base64," + Base64.encode(arrayBuffer)
+            obj['imagedata'] = "data:image/" + extension + ";base64," + Base64.encode(arrayBuffer)
             obj['imagesize'] = size;
         }
     }
